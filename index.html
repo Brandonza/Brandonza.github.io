@@ -287,7 +287,7 @@ function personalInfo(){
                         $.ajax({
                         type: "POST",
                         //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-                        url: "http://127.0.0.1:5000/personalInfo",
+                        url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
                         data: JSON.stringify({ 'session_id':session_id,'userName': userName,'userEmail':userEmail }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -316,7 +316,7 @@ function save(){
     $.ajax({
       type: "POST",
       //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-      url: "http://127.0.0.1:5000/aclickCheck",
+      url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
       data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -355,7 +355,7 @@ document.getElementById(number).setAttribute('name',randonButton);
     $.ajax({
       type: "POST",
       //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-      url: "http://127.0.0.1:5000/startA",
+      url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/startA",
       data: JSON.stringify({ 'session_id':session_id}),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -395,7 +395,7 @@ function a_clickCheck(number){
     $.ajax({
     type: "POST",
     //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-    url: "http://127.0.0.1:5000/aclickCheck",
+    url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
     data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -419,7 +419,7 @@ else {
   $.ajax({
     type: "POST",
     //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-    url: "http://127.0.0.1:5000/aclickCheck",
+    url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
     data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':false }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -447,7 +447,7 @@ var buttonsNumbersletters = new Array(1,"A",2,"B",3,"C",4,"D",5,"E",6,"F",7,"G",
     $.ajax({
       type: "POST",
       //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-      url: "http://127.0.0.1:5000/bclickCheck",
+      url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
       data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -481,7 +481,7 @@ function populateLetters(number,randonButtonLetters){
       $.ajax({
         type: "POST",
         //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-        url: "http://127.0.0.1:5000/startB",
+        url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/startB",
         data: JSON.stringify({ 'session_id':session_id}),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -518,7 +518,7 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
   $.ajax({
     type: "POST",
     //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-    url: "http://127.0.0.1:5000/bclickCheck",
+    url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
     data: JSON.stringify({ 'session_id':session_id,'numberLetter':numberLetter,'correct':true }),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -546,7 +546,7 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
 $.ajax({
   type: "POST",
   //url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/personalInfo",
-  url: "http://127.0.0.1:5000/bclickCheck",
+  url: "https://uvthrfon7l.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
   data: JSON.stringify({ 'session_id':session_id,'numberLetter':numberLetter,'correct':false }),
   contentType: "application/json; charset=utf-8",
   dataType: "json",
