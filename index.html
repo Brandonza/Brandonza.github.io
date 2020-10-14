@@ -90,28 +90,13 @@ button.big-button:active {
 margin-bottom: 30px;"> </a> </div>
       <div class="login__header s-back-grad">
         <h3><i class="fa fa-play-circle"></i>Digital Trail Making Test</h3>
-        <p>Please enter the following details below to start</p>
+        <p></p>
       </div>
-      <form class="login__form">
-        <div class="form-group">
-          <input class="form-control" required="" id="userName" name="userName" placeholder="Name and Surname*" type="text">
-        </div>
-        <div class="form-group">
-          <input class="form-control" required="" id="userEmail" name="userEmail" placeholder="Email Adress*" type="email">
-        </div>
-        <br>
-        <div class="text-center">
-          <button onclick="personalInfo();" type="button" name="button" class="c-btn c-btn--action -big">Next</button>
-        </div>
-      </form>
+
     </div>
-  </div>
-  <div id="step2" style="display:none;">
+  
     <div class="login__container">
-      <div class="login__header s-back-grad">
-        <h3><i class="fa fa-list-alt"></i>RULES</h3>
-        <p>Please read the following rules and click on Start A</p>
-      </div>
+
       <br>
       <h3 style="font-size:20px;font-weight:bold;">Part A</h3>
       <br>
@@ -148,8 +133,8 @@ margin-bottom: 30px;"> </a> </div>
         <p>Congratulations, you have successfully completed Section A!</p>
       </div>
       <div style="text-align:center;"> You have completed section A!<br>
-        Total time taken: x seconds<br>
-        Number of incorrect selections: x <br>
+       <br> <div id="aTimeTakenDiv"></div>
+        <div id="aErrorsDiv"></div><br>
         <br>
         <button onclick="startB();" type="submit" name="button" class="c-btn c-btn--action -big">Start B</button>
       </div>
@@ -161,9 +146,9 @@ margin-bottom: 30px;"> </a> </div>
         <h3><i class="fa fa-check-circle"></i>SECTION B COMPLETED</h3>
         <p>Congratulations, you have successfully completed Section B!</p>
       </div>
-      <div style="text-align:center;"> You have completed section B!<br>
-        Total time taken: x seconds<br>
-        Number of incorrect selections: x <br>
+       <div style="text-align:center;"> You have completed section B!<br>
+       <br> <div id="bTimeTakenDiv"></div>
+        <div id="bErrorsDiv"></div><br>
         <br>
         <button onclick="save();" type="submit" name="button" class="c-btn c-btn--action -big">Save</button>
       </div>
@@ -265,7 +250,16 @@ right: 40px;"></button>
 <script type="text/javascript" src="js/plugins.js"></script> 
 <script type="text/javascript" src="js/custom.js"></script> 
 <script>	
-  var session_id = null;
+    var session_id = null;
+    var last_clicked = 0;
+    var highest_number = 0;
+    var aStartTime;
+    var aEndTime;
+    var aErrors = 0;
+    var bStartTime;
+    var bEndTime;
+    var bErrors = 0;
+
   function session_id_gen() {
     session_id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     console.debug(session_id);
@@ -312,13 +306,11 @@ function save(){
   var buttons = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25);
 
   function endNumbersRandom(number){
-    $.ajax({
-      type: "POST",
-      url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
-      data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: function(msg){
+    var aEndTime = new Date().getTime();
+    var aTimeTaken = (aEndTime - aStartTime)/1000;
+    document.getElementById("aTimeTakenDiv").innerHTML = "Total time taken: "+aTimeTaken+" seconds"
+    document.getElementById("aErrorsDiv").innerHTML = "Number of incorrect selections: "+aErrors
+     
       console.log('endNumbersRandom - sucess');
       document.getElementById("numbersRandom").style.display = "none"
       document.getElementById("step3").style.display = "block"
@@ -327,21 +319,12 @@ function save(){
           $(this).remove(); 
           });
           }, 2000);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            //alert("Something went wrong");
-            console.log(errorThrown);
-            }
-          });
 }
 
-  var last_clicked = 0;
-  var highest_number = 0;
+
   function populate(number,randonButton){
-console.debug("randonButton");
-console.debug(randonButton);
-console.log("number");
-console.log(number);
+console.debug("randonButton",randonButton);
+console.log("number",number);
 document.getElementById(number).innerHTML = randonButton;
 document.getElementById(number).value = randonButton;
 document.getElementById(number).setAttribute('name',randonButton);
@@ -349,30 +332,18 @@ document.getElementById(number).setAttribute('name',randonButton);
   }
 
   function startA(){
-
-    $.ajax({
-      type: "POST",
-      url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/startA",
-      data: JSON.stringify({ 'session_id':session_id}),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: function(msg){
       console.log('startA - sucess');
-      document.getElementById("step2").style.display = "none"
+      document.getElementById("step1").style.display = "none"
       const numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
       
       for(var i = 1 ; i <= numbers.length ; i++ ){
     const randonButton = buttons.sort(function() { return 0.5 - Math.random();}).pop();
-    
+    aStartTime = new Date().getTime();
     populate(i,randonButton);
     highest_number = i;
       }
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-    //alert("Something went wrong");
-    console.log(errorThrown);
-    }
-});
+
+   
 };
 
 function a_clickCheck(number){
@@ -389,72 +360,42 @@ function a_clickCheck(number){
   //document.getElementsByName(String(last_clicked)).style.color = "white";
   console.log('last_clicked')
   console.log(last_clicked)
-    $.ajax({
-    type: "POST",
-    url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
-    data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(msg){
+
     console.log('a_clickCheck - sucess');
-    var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Correct!</strong> Next, one please</div>" );
- 
+    var w = $( "em" ).html( "<div class='alert alert-success' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Correct!</strong> Next, one please</div>" );
+
     window.setTimeout(function() {
         $(".alert").fadeTo(100, 0).slideUp(100, function(){
         $(this).remove(); 
         });
         }, 2000);
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-          //alert("Something went wrong");
-          console.log(errorThrown);
-          }
-        });
+          
       }
 else {
-  $.ajax({
-    type: "POST",
-    url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/aclickCheck",
-    data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':false }),
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(msg){
-    console.log('a_clickCheck - sucess');
+    aErrors++
+    console.log("errors",aErrors)
+    console.log('a_clickCheck - error');
     var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Incorrect!</strong> Please solve it in order!</div>" );
     window.setTimeout(function() {
         $(".alert").fadeTo(100, 0).slideUp(100, function(){
         $(this).remove(); 
         });
         }, 2000);
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-          //alert("Something went wrong");
-          console.log(errorThrown);
-          }
-        });
+          
 }
   }
 ///Number Test END
 ///NumberLetter Test START
 var buttonsNumbersletters = new Array(1,"A",2,"B",3,"C",4,"D",5,"E",6,"F",7,"G",8,"H",9,"I",10,"J",11,"K",12,"L",13);
   function endNumbersLettersRandom(number){
-
-    $.ajax({
-      type: "POST",
-      url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
-      data: JSON.stringify({ 'session_id':session_id,'number':number,'correct':true }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: function(msg){
+    var bEndTime = new Date().getTime();
+    var bTimeTaken = (bEndTime - bStartTime)/1000;
+    alert(bTimeTaken)
+        document.getElementById("bTimeTakenDiv").innerHTML = "Total time taken: "+ bTimeTaken +" seconds"
+    document.getElementById("bErrorsDiv").innerHTML = "Number of incorrect selections: "+bErrors
       console.log('endNumbersRandom - sucess');
             document.getElementById("numbersLettersRandom").style.display = "none"
             document.getElementById("step4").style.display = "block"
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            //alert("Something went wrong");
-            console.log(errorThrown);
-            }
-          });
   }
 
 var last_clicked_letters = 0;
@@ -472,13 +413,7 @@ function populateLetters(number,randonButtonLetters){
     }
 
     function startB(){
-      $.ajax({
-        type: "POST",
-        url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/startB",
-        data: JSON.stringify({ 'session_id':session_id}),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(msg){
+      bStartTime = new Date().getTime();
         console.log('startB - sucess');
         document.getElementById("step3").style.display = "none"
         document.getElementById("numbersLettersRandom").style.display = "block";
@@ -488,12 +423,6 @@ function populateLetters(number,randonButtonLetters){
         console.warn(randonButtonLetters);
         populateLetters(i,randonButtonLetters);
         highest_number_letters = 3;}
-      },
-              error: function(XMLHttpRequest, textStatus, errorThrown) {
-              //alert("Something went wrong");
-              console.log(errorThrown);
-              }
-            });
   };
 
   function b_clickCheck(numberLetter){
@@ -508,13 +437,6 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
     }
   if (String(numbersLetters[last_clicked_letters]) == String(numberLetter)){
   last_clicked_letters =  last_clicked_letters + 1
-  $.ajax({
-    type: "POST",
-    url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
-    data: JSON.stringify({ 'session_id':session_id,'numberLetter':numberLetter,'correct':true }),
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(msg){
     console.log('bclickCheck - sucess');
     console.log('What is next')
     console.log(numbersLetters[last_clicked_letters])
@@ -523,25 +445,15 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
         $(this).remove(); 
         });
         }, 2000);
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-          //alert("Something went wrong");
-          console.log(errorThrown);
-          }
-        });
+
 
   //document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.background = "green";
 			//document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.color = "white";
 }
   else {
+    bErrors++
+    console.log("bERrors",bErrors)
 //Restyle to nice looking modal that does not stop user interacting with page and disappears after 1 second
-$.ajax({
-  type: "POST",
-  url: "https://omswlahiz7.execute-api.af-south-1.amazonaws.com/dev/bclickCheck",
-  data: JSON.stringify({ 'session_id':session_id,'numberLetter':numberLetter,'correct':false }),
-  contentType: "application/json; charset=utf-8",
-  dataType: "json",
-  success: function(msg){
   console.log('bclickCheck - sucess');
   var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Incorrect!</strong> Please solve it in order!</div>" );
   window.setTimeout(function() {
@@ -549,12 +461,6 @@ $.ajax({
     $(this).remove(); 
     });
     }, 1000);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //alert("Something went wrong");
-        console.log(errorThrown);
-        }
-      });
   }
 
 }
