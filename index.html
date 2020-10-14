@@ -150,7 +150,7 @@ margin-bottom: 30px;"> </a> </div>
        <br> <div id="bTimeTakenDiv"></div>
         <div id="bErrorsDiv"></div><br>
         <br>
-        <button onclick="save();" type="submit" name="button" class="c-btn c-btn--action -big">Save</button>
+      
       </div>
     </div>
   </div>
@@ -390,7 +390,6 @@ var buttonsNumbersletters = new Array(1,"A",2,"B",3,"C",4,"D",5,"E",6,"F",7,"G",
   function endNumbersLettersRandom(number){
     var bEndTime = new Date().getTime();
     var bTimeTaken = (bEndTime - bStartTime)/1000;
-    alert(bTimeTaken)
         document.getElementById("bTimeTakenDiv").innerHTML = "Total time taken: "+ bTimeTaken +" seconds"
     document.getElementById("bErrorsDiv").innerHTML = "Number of incorrect selections: "+bErrors
       console.log('endNumbersRandom - sucess');
@@ -440,12 +439,6 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
     console.log('bclickCheck - sucess');
     console.log('What is next')
     console.log(numbersLetters[last_clicked_letters])
-    window.setTimeout(function() {
-        $(".alert").fadeTo(100, 0).slideUp(100, function(){
-        $(this).remove(); 
-        });
-        }, 2000);
-
 
   //document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.background = "green";
 			//document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.color = "white";
@@ -456,11 +449,6 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
 //Restyle to nice looking modal that does not stop user interacting with page and disappears after 1 second
   console.log('bclickCheck - sucess');
   var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Incorrect!</strong> Please solve it in order!</div>" );
-  window.setTimeout(function() {
-    $(".alert").fadeTo(100, 0).slideUp(100, function(){
-    $(this).remove(); 
-    });
-    }, 1000);
   }
 
 }
