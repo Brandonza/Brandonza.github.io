@@ -8,7 +8,7 @@
 <title>Sports, Exercise Medicine & Lifestyle Institute</title>
 
 <!-- Favicons -->
-<link rel="icon" sizes="16x16" type="image/png" href="img/favicon.png">
+<link rel="icon" sizes="18x18" type="image/png" href="img/favicon.png">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Exo:400,600,700" rel="stylesheet">
@@ -88,7 +88,7 @@ button.big-button:active {
     <div class="login__container">
       <div style="text-align: center;"> <a href="#"> <img src="img/logo.png" style="max-width: 50%;
 margin-bottom: 30px;"> </a> </div>
-      <div class="login__header s-back-grad">
+      <div class="login__header s-back-grad" style="margin-bottom:-25px">
         <h3><i class="fa fa-play-circle"></i>Digital Trail Making Test</h3>
         <p></p>
       </div>
@@ -101,25 +101,25 @@ margin-bottom: 30px;"> </a> </div>
       <h3 style="font-size:20px;font-weight:bold;">Part A</h3>
       <br>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">- When you press start, your screen will display the numbers 1 to 25 randomly scattered on your screen</li>
+        <li class="list-group-item">- When you press start, the numbers 1 to 25 will be randomly scattered on your screen</li>
         <li class="list-group-item">- Touch the numbers in order from 1 to 25</li>
         <li class="list-group-item">- If you make a mistake, do not stop, continue to complete the test</li>
-        <li class="list-group-item">- The time (sec) it takes you to touch the numbers in the correct order will be recorded</li>
+        <li class="list-group-item">- The time (sec) it takes you to touch the numbers in the correct order and any incorrect touches will be recorded</li>
         <li class="list-group-item">- Once you have completed Part A, you will move on to Part B</li>
       </ul>
       <br>
       <h3 style="font-size:20px;font-weight:bold;">Part B</h3>
       <br>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">- When you press “Continue to Part B”, your screen will display the numbers 1 to 13 AND the letters A to L randomly scattered on your screen</li>
-        <li class="list-group-item">- Alternate touching the numbers and letters in order. E.g. 1, A, 2, B, 3, C… 12, L, 13</li>
+        <li class="list-group-item">- When you press “Continue to Part B”, the numbers 1 to 13 AND the letters A to L will be randomly scattered on your screen</li>
+        <li class="list-group-item">- Alternate touching the numbers and letters in order. E.g. 1, A, 2, B, 3, C… 12, L, 13. Your last touch will be number 13</li>
         <li class="list-group-item">- If you make a mistake, do not stop, continue to complete the test</li>
-        <li class="list-group-item">- The time (sec) it takes you to touch the numbers in the correct order will be recorded</li>
-        <li class="list-group-item">- By pressing “Continue to Part B” you will start the second part of the test. Start immediately. </li>
+        <li class="list-group-item">- The time (sec) it takes you to touch the numbers and letters in the correct order and any incorrect touches will be recorded</li>
+      
       </ul>
       <br>
-      When you make a CORRECT connection, the preceding number/letter will turn green
-      Once you press start your test will begin immediately. You will not be able to start again <br>
+      When you make a CORRECT connection, the number/letter will turn green.<br>
+      Once you press start your test will begin immediately. You will not be able to start again. <br>
       <br>
       <div style="text-align:center;">
         <button onclick="startA();" type="button" name="button" class="c-btn c-btn--action -big">Start A</button>
@@ -130,9 +130,11 @@ margin-bottom: 30px;"> </a> </div>
     <div class="login__container">
       <div class="login__header s-back-grad">
         <h3><i class="fa fa-check-circle"></i>SECTION A COMPLETED</h3>
-        <p>Congratulations, you have successfully completed Section A!</p>
+        <p>Once you click "Start B" the second part of the test will start immediately<br>
+        Start with numbers first and then letters (e.g. 1, A, 2, B, 3, C...). Your last touch will be 13.</p>
       </div>
-      <div style="text-align:center;"> You have completed section A!<br>
+      <div style="text-align:center;"> <br>
+      
        <br> <div id="aTimeTakenDiv"></div>
         <div id="aErrorsDiv"></div><br>
         <br>
@@ -144,9 +146,9 @@ margin-bottom: 30px;"> </a> </div>
     <div class="login__container">
       <div class="login__header s-back-grad">
         <h3><i class="fa fa-check-circle"></i>SECTION B COMPLETED</h3>
-        <p>Congratulations, you have successfully completed Section B!</p>
+        <p></p>
       </div>
-       <div style="text-align:center;"> You have completed section B!<br>
+       <div style="text-align:center;"> <br>
        <br> <div id="bTimeTakenDiv"></div>
         <div id="bErrorsDiv"></div><br>
         <br>
@@ -162,7 +164,7 @@ margin-bottom: 30px;"> </a> </div>
 <div class="col-lg-12 text-center">
 <section id="cnt">
   <div class="login__container" id="numbersRandom" style="position:relative;display:none;height:34em;">
-    <p>The numbers are jumbled, hover over the number to see overlaped numbers.</p>
+    <p></p>
     <!-- <div id="numbersRandom"> -->
     <button id="1" class="big-button" onclick="a_clickCheck(this.value)" style="position:absolute;left: 25px;"></button>
     <button id="2" class="big-button" onclick="a_clickCheck(this.value)" style="position:absolute;top:130px;left:85px;"></button>
@@ -209,7 +211,7 @@ right: 40px;"></button>
   </div>
 
   <div class="login__container" id="numbersLettersRandom" style="position:relative;display:none;height:34em;">
-    <p>The alphabets and numbers are jumbled, hover over the number to see overlaped numbers.</p>
+    <p></p>
     <button id="letters1" class="big-button" onclick="b_clickCheck(this.value)" style="position:absolute;left:25px;"></button>
     <button id="letters2" class="big-button" onclick="b_clickCheck(this.value)" style="position:absolute;top:130px;left:85px;"></button>
     <button id="letters3" class="big-button" onclick="b_clickCheck(this.value)" style="position:absolute;left:134px;"></button>
@@ -259,6 +261,7 @@ right: 40px;"></button>
     var bStartTime;
     var bEndTime;
     var bErrors = 0;
+    var bPreviousCorrectClick = 0;
 
   function session_id_gen() {
     session_id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -343,21 +346,23 @@ document.getElementById(number).setAttribute('name',randonButton);
 
 function a_clickCheck(number){
   number = parseInt(number);
-  //if(last_clicked + 1 == number && number == highest_number) {
-    if(4 == number) {
+  if(last_clicked + 1 == number && number == 1) {
     endNumbersRandom(number);
   }
   if (last_clicked + 1 == number){
+        try{
+    document.getElementsByName(String(last_clicked))[0].style.background = "#EDE7E7";
+    }
+    catch(err) {
+  console.log(err)
+}
     last_clicked = number;
-  console.debug('last_clicked');
-  console.debug(String(last_clicked));
-  document.getElementsByName(String(last_clicked))[0].style.background = "green";
-  //document.getElementsByName(String(last_clicked)).style.color = "white";
-  console.log('last_clicked')
-  console.log(last_clicked)
-
+    console.debug('last_clicked');
+    console.debug(String(last_clicked));
+    document.getElementsByName(String(last_clicked))[0].style.background = "#bfe6bf";
+    console.log('last_clicked')
+    console.log(last_clicked)
     console.log('a_clickCheck - sucess');
-         
       }
 else {
     aErrors++
@@ -403,7 +408,7 @@ function populateLetters(number,randonButtonLetters){
         console.log(buttonsNumbersletters)
         console.warn(randonButtonLetters);
         populateLetters(i,randonButtonLetters);
-        highest_number_letters = 3;}
+        highest_number_letters = 13;}
   };
 
   function b_clickCheck(numberLetter){
@@ -416,11 +421,18 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
   endNumbersLettersRandom(numberLetter);
     }
   if (String(numbersLetters[last_clicked_letters]) == String(numberLetter)){
-  last_clicked_letters =  last_clicked_letters + 1
+    
+        try{
+    document.getElementsByName('b_'+String(numbersLetters[last_clicked_letters-1]))[0].style.background = "#EDE7E7";
+    }
+    catch(err) {
+  console.log(err)
+}
+document.getElementsByName('b_'+String(numbersLetters[last_clicked_letters]))[0].style.background = "#bfe6bf";
+  last_clicked_letters = last_clicked_letters + 1
+  
     console.log('bclickCheck - sucess');
-    console.log('What is next')
-    console.log(numbersLetters[last_clicked_letters])
-    document.getElementsByName('b_'+String(last_clicked_letters))[0].style.background = "green";
+    console.log('What is next',numbersLetters[last_clicked_letters])
 			//document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.color = "white";
 }
   else {
