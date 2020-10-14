@@ -314,11 +314,6 @@ function save(){
       console.log('endNumbersRandom - sucess');
       document.getElementById("numbersRandom").style.display = "none"
       document.getElementById("step3").style.display = "block"
-      window.setTimeout(function() {
-          $(".alert").fadeTo(100, 0).slideUp(100, function(){
-          $(this).remove(); 
-          });
-          }, 2000);
 }
 
 
@@ -356,31 +351,18 @@ function a_clickCheck(number){
     last_clicked = number;
   console.debug('last_clicked');
   console.debug(String(last_clicked));
-  //document.getElementsByName(String(last_clicked)).style.background = "green";
+  document.getElementsByName(String(last_clicked))[0].style.background = "green";
   //document.getElementsByName(String(last_clicked)).style.color = "white";
   console.log('last_clicked')
   console.log(last_clicked)
 
     console.log('a_clickCheck - sucess');
-    var w = $( "em" ).html( "<div class='alert alert-success' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Correct!</strong> Next, one please</div>" );
-
-    window.setTimeout(function() {
-        $(".alert").fadeTo(100, 0).slideUp(100, function(){
-        $(this).remove(); 
-        });
-        }, 2000);
-          
+         
       }
 else {
     aErrors++
     console.log("errors",aErrors)
     console.log('a_clickCheck - error');
-    var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Incorrect!</strong> Please solve it in order!</div>" );
-    window.setTimeout(function() {
-        $(".alert").fadeTo(100, 0).slideUp(100, function(){
-        $(this).remove(); 
-        });
-        }, 2000);
           
 }
   }
@@ -408,7 +390,7 @@ function populateLetters(number,randonButtonLetters){
   console.debug('equal to this = '+randonButtonLetters);
   document.getElementById(uniqueId).innerHTML = randonButtonLetters;
   document.getElementById(uniqueId).value = randonButtonLetters;
-  document.getElementById(uniqueId).setAttribute('name',randonButtonLetters);
+  document.getElementById(uniqueId).setAttribute('name','b_'+randonButtonLetters);
     }
 
     function startB(){
@@ -430,7 +412,6 @@ console.log(String(numberLetter));
 console.log('What should have been clicked');
 console.log(String(numbersLetters[last_clicked_letters]));
 
-
 if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numberLetter == highest_number_letters) {
   endNumbersLettersRandom(numberLetter);
     }
@@ -439,8 +420,7 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
     console.log('bclickCheck - sucess');
     console.log('What is next')
     console.log(numbersLetters[last_clicked_letters])
-
-  //document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.background = "green";
+    document.getElementsByName('b_'+String(last_clicked_letters))[0].style.background = "green";
 			//document.getElementsByName('letters'+numbersLetters[last_clicked_letters]).style.color = "white";
 }
   else {
@@ -448,7 +428,6 @@ if(String(numbersLetters[last_clicked_letters]) == String(numberLetter) && numbe
     console.log("bERrors",bErrors)
 //Restyle to nice looking modal that does not stop user interacting with page and disappears after 1 second
   console.log('bclickCheck - sucess');
-  var w = $( "em" ).html( "<div class='alert alert-danger' role='alert' style='position:fixed;top:5px;right:5px;z-index:9999;'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Incorrect!</strong> Please solve it in order!</div>" );
   }
 
 }
